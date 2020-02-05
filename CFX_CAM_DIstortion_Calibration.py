@@ -105,8 +105,11 @@ def undistortImage(imgPath, camMatrix, dist, alpha=0.5):
 
     imgUndist = cv2.undistort(img, camMatrix, dist, None, newCameraMat)
     imgUndistCrop = imgUndist[roiY:roiY + roiH, roiX:roiX + roiW]
-    cv2.imwrite('undist_img_crop.BMP', imgUndistCrop)
-    cv2.imwrite('undist_img.BMP', imgUndist)
+    
+    _, imgFmt = imgPath.split('.')
+
+    cv2.imwrite('undist_img_crop.' + imgFmt , imgUndistCrop)
+    cv2.imwrite('undist_img.' + imgFmt, imgUndist)
 
     print("Undistorting image completed!")
     
@@ -153,7 +156,7 @@ if __name__ == "__main__":
     alpha = 1
 
     #undistortImage("target.BMP", camMat, dist, alpha)
-    imageList = readImages(loadImageDirectory, loadFileName, imgFmt)
-    undistImageList = undistortImages(imageList, camMat, dist, alpha)
-    writeImages(saveImageDirectory, saveFileName, imgFmt, undistImageList)
+    #imageList = readImages(loadImageDirectory, loadFileName, imgFmt)
+    #undistImageList = undistortImages(imageList, camMat, dist, alpha)
+    #writeImages(saveImageDirectory, saveFileName, imgFmt, undistImageList)
     
